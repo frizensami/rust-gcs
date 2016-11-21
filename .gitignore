@@ -1,0 +1,4 @@
+target
+ArduCopter.elf
+eeprom.bin
+terrain/

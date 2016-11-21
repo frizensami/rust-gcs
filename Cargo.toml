@@ -1,0 +1,8 @@
+[package]
+name = "rust-gcs"
+version = "0.1.0"
+authors = ["Sriram Sami <frizensami@gmail.com>"]
+
+[dependencies]
+# mavlink = "0.4"
+mavlink = { git = "https://github.com/frizensami/rust-mavlink" }

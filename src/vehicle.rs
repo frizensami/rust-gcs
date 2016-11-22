@@ -34,7 +34,7 @@ impl Vehicle {
         if let Some(ref conn) = self.conn {
             return match conn.recv() {
                 Ok(msg) => { self.set_reconnect_requested(false); return Some(msg); },
-                Err(_)  => { self.set_reconnect_requested(true); println!("recv fail"); return None;  }
+                Err(_)  => { self.set_reconnect_requested(true); println!("Vehicle: try recv fail - reconnect requested"); return None;  }
             }
         } else {
             return None;
@@ -45,7 +45,7 @@ impl Vehicle {
     /// Tries once to make a (blocking) connection to a Mavlink endpoint
     /// specified by the connection string for this vehicle
     pub fn try_start_connection(&mut self) -> bool {
-        println!("Trying to connect to {}", self.conn_string);
+        println!("Vehicle: Trying to start connect to {}", self.conn_string);
         match mavlink::connect(&self.conn_string[..]) {
             Ok(conn) => { self.conn = Some(conn); println!("connection established"); self.set_reconnect_requested(false); return true; },
             Err(_) => { self.conn = None; println!("failed to connect"); self.set_reconnect_requested(true); return false; }

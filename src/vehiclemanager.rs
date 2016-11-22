@@ -28,12 +28,13 @@ impl VehicleManager {
 
        thread::spawn(move || {
             loop {
+                thread::sleep(Duration::from_millis(500));
                 let mut current_vehicle = veh_clone.lock().unwrap();
                 if current_vehicle.is_reconnect_requested() || current_vehicle.conn.is_none() {
-                    println!("trying to start connection (vehiclemanager)");
+                    println!("trying to (re)start connection (vehiclemanager)");
                     current_vehicle.try_start_connection();
-                    thread::sleep(Duration::from_millis(500));
                 }
+                // Note that the lock is RELEASED HERE IMPLICITLY: we shouldn't delay.
             }
        });
 

@@ -9,4 +9,4 @@ Rust-GCS aims to be a **reliable** and **fast** ground-control station for vehic
 
 `vehicle` lib: Contains the connection object that is used to send/recv messages to the vehicle.
 
-`vehiclemanager` lib: Maintains an admin thread for each vehicle: which does connection maintainence + sendbuffer + receivebuffer.
+`vehiclemanager` lib: Keeps a Vector of Arc<Mutex<Vehicle>> and maintain the connection with them.
